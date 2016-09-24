@@ -43,10 +43,7 @@
                             text: response.message
                         });
 
-                    }else {
-                        pTag1.html( response.message );
                     }
-
                 }
 
             });
