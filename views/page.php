@@ -6,18 +6,33 @@
  * Time: 12:08 PM
  */
 ?>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <h1>Login</h1>
-<div id="login"
-     <p id="pTag1"></p>
-<label>
-<input id="username" type="text" placeholder="Username" > Username :
-<input id="password" type="text" placeholder="password" >Password :
-    <button type="submit" id="btnSubmit" value="submit">Submit</button>
-</label>
+
+<html>
+<head>
+    <title>Demo</title>
+</head>
+
+<body>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<h1>Login</h1>
+<div id="login">
+    <form action="http://localhost/test/controller/page.php" method="post" id="form-one"  name="form-one">
+        <p id="pTag1"></p>
+        <label>Username :</label>
+        <input id="username" name="username" type="text" placeholder="Username" >
+        <label>Password :</label>
+        <input id="password" name="password" type="password" placeholder="password" >
+        <button type="submit" id="btnSubmit" value="submit">Login</button>
+    </form>
 </div>
 
 <script>
+    var validate = function(formElem){
+        console.log(formElem.username.value);
+        console.log(formElem.username.value);
+
+        return false;
+    };
     $('body').on('click','#btnSubmit',function(e){
 
         var xdata={};
@@ -25,30 +40,28 @@
         xdata.password = $('#password').val();
 
 
-        if(!xdata.password){
-            $( "#pTag1" ).append( "Enter a password" );
-        }
-        else
-        {
-            $.ajax({
-                type:"POST",
-                url:'/controller/page',
-                data: xdata,
-                success: function( response ){
+        $.ajax({
+            type:"POST",
+            url:'/test/controller/page.php',
+            data: xdata,
+            success: function( response ){
 
-                    if( response.success ){
+                if( response.success ){
 
-                        $.msgGrowl ({
-                            type: 'success',
-                            text: response.message
-                        });
+                    $.msgGrowl ({
+                        type: 'success',
+                        text: response.message
+                    });
 
-                    }
                 }
+            }
 
-            });
+        });
 
-        }
+
     });
 </script>
+</body>
+
+</html>
 
